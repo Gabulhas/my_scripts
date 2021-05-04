@@ -1,0 +1,4 @@
+#!/bin/bash
+#Wrapper tu run java with GPU
+echo "Setting DRI_PRIME=1"
+env DRI_PRIME=1 prime-run java "$@"
