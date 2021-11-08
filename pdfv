@@ -1,0 +1,3 @@
+#!/bin/bash
+# "Kinda of an alias"
+(zathura "$@" &)

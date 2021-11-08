@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function concatenate_args
+{
+     string=""
+     for a in "$@"
+     do
+		     string+="$a+"
+     done
+     echo "$string"
+}
+
+args="$(concatenate_args "$@")"
+curl wttr.in/$args
