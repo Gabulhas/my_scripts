@@ -1,0 +1,10 @@
+#!/bin/bash
+device="74:45:CE:A7:7A:30"
+
+if bluetoothctl info "$device" | grep 'Connected: yes' -q; then
+  bluetoothctl power off
+  bluetoothctl disconnect "$device"
+else
+  bluetoothctl power on
+  bluetoothctl connect "$device"
+fi
