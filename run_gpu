@@ -1,3 +1,4 @@
 #!/bin/bash
 # "Kinda of an alias"
-env DRI_PRIME=1 prime-run "$@"
+echo "$@"
+prime-run "$@"
