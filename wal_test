@@ -4,5 +4,5 @@ backends=$(printf "schemer2\nhaishoku\ncolorthief\nwal\ncolorz")
 for i in $backends; do
     echo testing $i
     read -p '' l
-    wal --backend $i -i $1
+    wal --backend $i -i $@
 done
