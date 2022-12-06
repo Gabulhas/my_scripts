@@ -14,7 +14,7 @@ fi
 random_image=`[ -z "$random_image" ] && echo $(ls $wallpapers_folder | shuf -n 1) || echo $random_image`
 
 image_line=`cat $wallpapers_folder/.backend | grep $random_image`
-backend_selection=` echo $image_line | awk -F: '{print $2}'` 
+backend_selection=` echo $image_line | awk -F: '{print $2}' | sed 's/,/\n/g' | shuf | head -n1` 
 theme_selection=` echo $image_line | awk -F: '{print $3}'`
 backend=`[ -z "$backend_selection" ] && echo " " || echo "--backend $backend_selection"`
 theme=`[ -z "$theme_selection" ] && echo " " || echo "--theme $theme_selection"`
