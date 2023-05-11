@@ -46,7 +46,12 @@ selected_image_or_theme=""
 if [[ $1 == "RANDOM" ]]; then
     selected_image_or_theme=`shuf -n 1 $configfile`
 else
-    selected_image_or_theme=`cat $configfile| awk -F: '{print $1}'| rofi -window-title Wallpaper -dmenu |  xargs -I % grep % $configfile`
+    selected_image_or_theme=`cat $configfile| grep -v '^$' | awk -F: '{print $1}'| rofi -window-title Wallpaper -dmenu |  xargs -I % grep % $configfile`
+
+fi
+
+if [[ $selected_image_or_theme == "" ]]; then
+    selected_image_or_theme=`shuf -n 1 $configfile`
 fi
 
 
@@ -54,12 +59,13 @@ fi
 if [[ $selected_image_or_theme == *"json"* ]]; then
     #THEME
     wal --theme $wallpaper_folder/$selected_image_or_theme
-
-else
+elif [[ $selected_image_or_theme == *":"* ]]; then
     backend_selection=` echo $selected_image_or_theme | awk -F: '{print $2}' | sed 's/,/\n/g' | shuf | head -n1` 
     backend=`[ -z "$backend_selection" ] && echo " " || echo "--backend $backend_selection"`
     image_path=$wallpaper_folder/$(echo $selected_image_or_theme | awk -F: '{print $1}')
 
-
     wal -i $image_path $backend
+
+else
+    wal --theme $selected_image_or_theme
 fi

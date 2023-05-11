@@ -1,0 +1,5 @@
+#!/bin/fish
+cd /home/guilherme/gitdownloads/tezos
+eval (opam env)
+clear
+
